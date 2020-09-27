@@ -1,4 +1,4 @@
-function [casesOut] = createCases(globalSettings, ddx, ddxLabel, diss, dissLabel)
+function [casesOut] = createCases(globalSettings, ddx, ddxLabel, diss, dissLabel, outputDirName)
 
     casesOut = {};
     idx = 1;
@@ -37,6 +37,7 @@ function [casesOut] = createCases(globalSettings, ddx, ddxLabel, diss, dissLabel
             
             
             casesOut{idx}.globalSettings = globalSettings;
+            casesOut{idx}.outputDirName = outputDirName;
             casesOut{idx}.dx = dx;
             casesOut{idx}.x0 = xstart;
             casesOut{idx}.x1 = xend;
@@ -48,8 +49,8 @@ function [casesOut] = createCases(globalSettings, ddx, ddxLabel, diss, dissLabel
             casesOut{idx}.dt = CFL*dx/a;
             casesOut{idx}.Nt = Nt;
             casesOut{idx}.N = N;
-            casesOut{idx}.name = ['case-' ddxLabel{i1} '-' dissLabel{i2}];
-            casesOut{idx}.outputDir = ['outputData/' casesOut{idx}.name];
+            casesOut{idx}.name = ['dc1d-' ddxLabel{i1} '-' dissLabel{i2}];
+            casesOut{idx}.outputDir = [outputDirName '/' casesOut{idx}.name];
             idx = idx + 1;
         end
     end
