@@ -39,7 +39,7 @@ function [casesOut] = createCases(globalSettings, ddx, ddxLabel, diss, dissLabel
             
             %resolved
             omega = 10;
-            %u = u + 0.5*sin(omega*2*pi*xcells / (xmax-xmin));
+            u = u + 0.5*sin(omega*2*pi*xcells / (xmax-xmin));
             
             %marginal
             omega = 20;
@@ -47,7 +47,7 @@ function [casesOut] = createCases(globalSettings, ddx, ddxLabel, diss, dissLabel
             
             %under-resolved
             omega = 40;
-            %u = u + 0.1*sin(omega*2*pi*xcells / (xmax-xmin));
+            u = u + 0.1*sin(omega*2*pi*xcells / (xmax-xmin));
             
             
             casesOut{idx}.globalSettings = globalSettings;
