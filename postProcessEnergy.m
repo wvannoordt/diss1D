@@ -5,7 +5,7 @@ function [] = postProcessEnergy(dirname, outputdir)
     listing = dir([dirname '/dc1d*']);
     Ncases = length(listing);
     legendNames = {};
-    figure
+    figure('Position', [10 10 1648 900])
     hold on
     for i = 1:Ncases
         dataName = [dirname '/' listing(i).name '/data.csv'];
@@ -15,9 +15,10 @@ function [] = postProcessEnergy(dirname, outputdir)
         data = csvread(dataName);
         energy = diag(data'*data);
         energy = energy/energy(1);
-        plot(energy)
+        plot(energy, 'LineWidth', 2)
     end
-    %legend(legendNames);
+    a = legend(legendNames);
+    set(a, 'location', 'northeastoutside');
     saveas(gcf, [outputdir '/energy.png']);
     close all
     

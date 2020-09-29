@@ -20,19 +20,33 @@ function [] = postProcessAnim(dirname, outputdir)
         Ntmin = min(Ntmin, info.caseIn.Nt);
     end
     
-    figure
+    figure('Position', [10 10 1648 900])
+    havebounds = false;
+    abounds = [0 1 0 1];
     for n = 1:(Ntmin+1)
         clf
         hold on
         for i = 1:Ncases
             dat = datas{i};
+            if ~havebounds
+                r = 0.1;
+                minVal = min(dat(:, 1));
+                maxVal = max(dat(:, 1));
+                z = max(abs([minVal maxVal]));
+                abounds = [info.caseIn.x0 info.caseIn.x1 -(1+r)*z (1+r)*z];
+            end
             plot(x, dat(:, n));
         end
+        a = legend(legendNames);
+        axis(abounds);
+        set(a, 'location', 'northeastoutside');
         drawnow
         hold off
+        if (n==(Ntmin+1))
+            saveas(gcf, [outputdir '/waveform.png']);
+        end
     end
-    %legend(legendNames);
-    %saveas(gcf, [outputdir '/energy.png']);
+    
     close all
 
 end

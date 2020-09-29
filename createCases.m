@@ -35,12 +35,26 @@ function [casesOut] = createCases(globalSettings, ddx, ddxLabel, diss, dissLabel
               end
             end
             
+            u = 1.5*u/(max(abs(u)));
+            
+            %resolved
+            omega = 10;
+            %u = u + 0.5*sin(omega*2*pi*xcells / (xmax-xmin));
+            
+            %marginal
+            omega = 20;
+            u = u + 0.4*sin(omega*2*pi*xcells / (xmax-xmin));
+            
+            %under-resolved
+            omega = 40;
+            %u = u + 0.1*sin(omega*2*pi*xcells / (xmax-xmin));
+            
             
             casesOut{idx}.globalSettings = globalSettings;
             casesOut{idx}.outputDirName = outputDirName;
             casesOut{idx}.dx = dx;
-            casesOut{idx}.x0 = xstart;
-            casesOut{idx}.x1 = xend;
+            casesOut{idx}.x0 = xmin;
+            casesOut{idx}.x1 = xmax;
             casesOut{idx}.initialCondition = u;
             casesOut{idx}.x = xcells;
             casesOut{idx}.ddxCoeff = ddx{i1};
